@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="navbar">
+    <h2><a href="./index.html"><button class="navbtn">Admin</button></a></h2>
+    <h2><a href="./products.html"><button class="navbtn">Users</button></a></h2>
+    <h2><a href="./login.html"><button class="navbtn">Login</button></a></h2> 
+    <h2><a href="./register.html"><button class="navbtn">Register</button></a></h2> 
+</div>
+
+
+<!-- admin table -->
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">address</th>
+                <th scope="col">country</th>
+                <th scope="col">phone</th>
+                <th scope="col">type</th>
+            </tr>
+        </thead>
+        <tbody
+id="users">
+</tbody>
+    <script>
+let users = [];
+const userContainer = document.getElementById("users");
+fetch("http://localhost:6969/users")
+  .then((res) => res.json())
+  .then((data) => {
+    users = data;
+    console.log(data);
+    showUsers(data);
+  });
+function showUsers(users) {
+  //   prodContainer.innerHTML = "";
+  users.forEach((user) => {
+    userContainer.innerHTML += `
+                <tr>
+                    <td>${ user.full_name }</td>
+                    <td>${ user.email }</td>
+                    <td>${ user.billing_address }</td>
+                    <td>${ user.country }</td>
+                    <td>${ user.phone }</td>
+                    <td>${ user.user_type }</td>
+                </tr>
+            </tbody>
+    `;
+  });
+}
+    </script>
+</body>
+
+
+
+

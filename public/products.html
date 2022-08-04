@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="navbar">
+        <h2><a href="./index.html"><button class="navbtn">Admin</button></a></h2>
+    <h2><a href="./products.html"><button class="navbtn">Users</button></a></h2>
+    <h2><a href="./login.html"><button class="navbtn">Login</button></a></h2> 
+    <h2><a href="./register.html"><button class="navbtn">Register</button></a></h2> 
+
+      </div>
+
+    
+<!-- users table -->
+<table>
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Sku</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Description</th>
+            <th scope="col">Image</th>
+        </tr>
+    </thead>
+    <tbody
+id="products">
+</tbody>
+<script>
+let products = [];
+const productContainer = document.getElementById("products");
+fetch("http://localhost:6969/products")
+.then((res) => res.json())
+.then((data) => {
+products = data;
+console.log(data);
+showproducts(data);
+});
+function showproducts(products) {
+//   prodContainer.innerHTML = "";
+products.forEach((product) => {
+productContainer.innerHTML += `
+            <tr>
+                <td>${ product.name}</td>
+                <td>${ product.price }</td>
+                <td>${ product.sku }</td>
+                <td>${ product.weight }</td>
+                <td>${ product.description }</td>
+                <td>${ product.image }</td>
+            </tr>
+        </tbody>
+`;
+});
+}
+</script>
+</body>
+</html>

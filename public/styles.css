@@ -1,0 +1,39 @@
+body{
+    background-color: #000000;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* width: fit-content; */
+}
+th , td{
+    border: 3px solid greenyellow;
+
+}
+td{
+    height: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+td:hover{
+    background-color: greenyellow;
+}
+#navbar{
+    display: flex;
+    
+}
+.navbtn{
+    width: 100px;
+    height: 40px;
+    margin-bottom: 1%;
+    margin-right: 5px;
+}
+.box{
+    display: flex;
+    flex-direction: column;
+}
+input{
+    width: 300px;
+    height: 30px;
+    margin-bottom: 1%;
+}
