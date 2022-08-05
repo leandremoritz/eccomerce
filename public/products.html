@@ -35,7 +35,7 @@ id="products">
 <script>
 let products = [];
 const productContainer = document.getElementById("products");
-fetch("http://localhost:6969/products")
+fetch("https://creating-api.herokuapp.com/products")
 .then((res) => res.json())
 .then((data) => {
 products = data;

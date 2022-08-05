@@ -47,7 +47,7 @@
       e.preventDefault();
       const userEmail = document.getElementById("email").value;
       const psw = document.getElementById("password").value;
-      fetch("http://localhost:6969/users/login", {
+      fetch("https://creating-api.herokuapp.com/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,6 +63,7 @@
         .then((data) => {
           
           console.log(data)
+         
         });
     });
   </script>
