@@ -87,7 +87,7 @@ let ResetData = () => {
   };
 async function showItem(id) {
   const response = await fetch(
-    "http://localhost:6969/products/"+`${id}`,
+    "https://eom-project.herokuapp.com/products/"+`${id}`,
     {
       method: "GET",
       headers: {
