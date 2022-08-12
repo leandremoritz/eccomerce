@@ -28,7 +28,6 @@ router.post("/register", (req, res) => {
       full_name,
       email,
       password,
-      user_type,
       phone,
       country,
       billing_address,
@@ -44,7 +43,7 @@ router.post("/register", (req, res) => {
       email,
       // We sending the hash value to be stored witin the table
       password : hash,
-      user_type,
+      user_type: 'user',
       phone,
       country,
       billing_address,
@@ -85,7 +84,6 @@ router.post("/login", (req, res) => {
           req.body.password,
           result[0].password
         );
-        console.log(isMatch)
         if (!isMatch) {
           res.send("Password incorrect");
         } else {
@@ -172,7 +170,7 @@ router.post("/forgetpassword", (req, res) => {
             <h3>Hi ${result[0].full_name},</h3>
             <br>
             <h4>Click link below to reset your password</h4>
-            <a href="http://localhost:6969/resetPasswordw.html">
+            <a href="./resetPasswordw.html">
               Click Here to Reset Password
               user_id = ${result[0].user_id}
             </a>

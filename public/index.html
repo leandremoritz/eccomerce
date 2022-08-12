@@ -34,7 +34,7 @@ id="users">
     <script>
 let users = [];
 const userContainer = document.getElementById("users");
-fetch("https://creating-api.herokuapp.com/users")
+fetch("http://localhost:6969/users/")
   .then((res) => res.json())
   .then((data) => {
     users = data;

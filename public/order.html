@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     
+</body>
+</html>
+
+<script>
+ async function showItem(id) {
+  const response = await fetch(
+    "http://localhost:6969/products"+`${id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    }
+  );
+  let cartArray= []
+  let data = await response.json();
+  let product= data;
+  localStorage.setItem("product", JSON.stringify(product.pop()));
+  // alert(localStorage.product)
+  console.log=0
+  cartArray.push(JSON.parse(localStorage.product))
+  console.log(cartArray)
+  cartArray.forEach((product) => {
+    Basket.innerHTML+=`
+    <div class="productName">
+    <h1>
+    ${product.name}
+    </h1>
+    </div>
+    <div class="productContent">
+    <img src="${product.image}" alt="${product.name}">
+    <h3>${product.descriptions}</h3>
+    <p>R${product.price}</p>
+    </div>
+    `
+    localStorage.setItem('cart',JSON.stringify(cartArray))
+})
+}
+</script>

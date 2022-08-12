@@ -12,32 +12,22 @@
         <h2><a href="./index.html"><button class="navbtn">Admin</button></a></h2>
         <h2><a href="./products.html"><button class="navbtn">Users</button></a></h2>
         <h2><a href="./login.html"><button class="navbtn">Login</button></a></h2>
-        <h2><a href="./register.html"><button class="navbtn">Register</button></a></h2> 
-        <h2><a href="./addproduct.html"><button class="navbtn">Add product</button></a></h2>  
+        <h2><a href="./register.html"><button class="navbtn">Register</button></a></h2>  
       </div>
     
 
       
 <form id="form" method="post" >
-    <div class="box">
-    <h1>Hey !</h1>
-    
-    <input id="email"
-    type="email" name="email"  class="email"  placeholder="Email" required/>
-      
-    <input id="password" type="text" name="email" , class="email" placeholder="Password" required />
-      
-    <button class="navbtn" type="submit" >Sumbit </button>
-    
-    
-      
-    </div>
-      
-    </form>
-    <h2><a href="./register.html"><button class="navbtn">Sign Up</button></a></h2> 
-    
-    <p>Forgot your password? <a href="./forgetpassword.html">Click Here</a><u ></u></a></p>
-      
+  <input type="text" id="sku" placeholder="SKU">
+  <input type="text" id="name" placeholder="NAME">
+  <input type="text" id="price" placeholder="PRICE">
+  <input type="text" id="description" placeholder="DESCRIPTION">
+  <input type="text" id="image" placeholder="IMAGE">
+  <input type="text" id="brand" placeholder="brand">
+  <input type="text" id="stock" placeholder="STOCK">
+  <button type="submit">SUBMIT</button>
+</form> 
+  
 </body>
 </html>
 
@@ -46,16 +36,20 @@
     const form = document.getElementById("form");
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      const userEmail = document.getElementById("email").value;
-      const psw = document.getElementById("password").value;
-      fetch("http://localhost:6969/users/login", {
+  
+      fetch ("http://localhost:6969/products/addingproduct", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: userEmail,
-          password: psw,
+          sku:document.querySelector("#sku").value,
+          name:document.querySelector("#name").value,
+          price:document.querySelector("#price").value,
+          descriptions:document.querySelector("#description").value,
+          image:document.querySelector("#image").value,
+          brand:document.querySelector("#brand").value,
+          stock:document.querySelector("#stock").value,
         }),
       })
 

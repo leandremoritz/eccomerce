@@ -6,8 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
+
 </head>
 <body>
+    <script>
+    diplayBasket=()=>{
+        Basket.classList.toggle('active')
+    }
+    </script>
     <div id="navbar">
         <h2><a href="./index.html"><button class="navbtn">Admin</button></a></h2>
     <h2><a href="./products.html"><button class="navbtn">Users</button></a></h2>
@@ -15,10 +21,15 @@
     <h2><a href="./register.html"><button class="navbtn">Register</button></a></h2> 
 
       </div>
+      <button onclick="diplayBasket()">CART</button>
+      <div id="userCart">
+        <button onclick="resetData()">CHECKOUT</button>
+      </div>
 
     
 <!-- users table -->
 <table>
+
     <thead>
         <tr>
             <th scope="col">Name</th>
@@ -35,13 +46,14 @@ id="products">
 <script>
 let products = [];
 const productContainer = document.getElementById("products");
-fetch("https://creating-api.herokuapp.com/products")
+fetch("http://localhost:6969/products")
 .then((res) => res.json())
 .then((data) => {
 products = data;
 console.log(data);
 showproducts(data);
 });
+
 function showproducts(products) {
 //   prodContainer.innerHTML = "";
 products.forEach((product) => {
@@ -52,12 +64,84 @@ productContainer.innerHTML += `
                 <td>${ product.sku }</td>
                 <td>${ product.weight }</td>
                 <td>${ product.description }</td>
-                <td>${ product.image }</td>
+                <td><img  src="${ product.image }"></td>
+                <td><button  onclick="showItem(this.id)" id="${product.product_id}">Add to cart<button></td>
+                  
             </tr>
         </tbody>
 `;
 });
 }
+let cart=[]
+
+let Basket =document.querySelector('#userCart')
+if(!localStorage.getItem('product')){
+    console.log('cart empty')
+}
+else{
+    window.addEventListener('click',diplayBasket())
+}
+// document.querySelectorAll('.Item').addEventListener('click',showProduct())
+let ResetData = () => {
+    localStorage.clear();
+  };
+async function showItem(id) {
+  const response = await fetch(
+    "http://localhost:6969/products/"+`${id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    }
+  );
+  let cartArray= []
+  let data = await response.json();
+  let product= data;
+  localStorage.setItem("product", JSON.stringify(product.pop()));
+  // alert(localStorage.product)
+//   console.log=0
+  cartArray.push(JSON.parse(localStorage.product))
+  console.log(cartArray)
+  cartArray.forEach((product) => {
+    Basket.innerHTML+=`
+    <div class="productName">
+    <h1>
+    ${product.name}
+    </h1>
+    </div>
+    <div class="productContent">
+    <img src="${product.image}" alt="${product.name}">
+    <h3>${product.descriptions}</h3>
+    <input id="qty"> QTY </input>
+    <p id="total">R${product.price}</p>
+    </div>
+    `
+    console.log(cartArray[0])
+    cart.push(cartArray[0].product_id)
+    console.log(cart)
+    localStorage.setItem('cart',JSON.stringify(cart))
+
+})
+
+
+
+}
+let resetData =()=>{
+    localStorage.clear()
+     Basket.innerHTML=`
+     <button onclick="resetData()">CHECKOUT</button>
+     `
+}
 </script>
 </body>
 </html>
+
+<style>
+    img{
+        width: 100px;
+    }
+    .active{
+        display: none;
+    }
+</style>
