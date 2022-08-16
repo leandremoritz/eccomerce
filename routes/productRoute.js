@@ -28,11 +28,11 @@ router.get("/:id", (req, res) => {
     res.status(400).send(error);
   }
 });
-router.post('/addingproduct', middleware, (req, res)=>{
-   if(req.user.user_type === 'admin') {
-    const {sku,name,price,descriptions,image,category,stock} = req.body
+router.post('/addingproduct', (req, res)=>{
+   if(req.user.user_type === 'user') {
+    const {image,brand,descriptions,price} = req.body
     try{
-      con.query(`INSERT INTO  products (sku,name,price,descriptions,image,category,stock) values ("${sku}",'${name}','${price}','${descriptions}','${image}','${category}','${stock}')`, (err, result) => {
+      con.query(`INSERT INTO  products (image,branddescriptions,price) values ('${image}','${brand}','${descriptions}','${price}')`, (err, result) => {
         if (err) throw err;
         res.send(result);
       });
